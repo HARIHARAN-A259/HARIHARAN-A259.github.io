@@ -3,261 +3,412 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HARIHARAN A | AI/DS Portfolio</title>
+<title>HARIHARAN A — AI &amp; Machine Learning</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0b0f14;
-    --bg-alt: #10161d;
-    --card: #131a22;
-    --border: #223040;
-    --text: #e7edf3;
-    --text-dim: #9aa9b8;
-    --accent: #4fd1c5;
-    --accent-2: #7c9eff;
+    --bg: #FBFAF7;
+    --panel: #F5F2EC;
+    --ink: #1B1B18;
+    --muted: #6B675E;
+    --accent: #A6813C;
+    --accent-soft: #F1E9D8;
+    --gold: #B08D46;
+    --gold-2: #D9C48C;
+    --line: #E4DFD2;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
   body {
     background: var(--bg);
-    color: var(--text);
+    color: var(--ink);
     font-family: 'Inter', sans-serif;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.65;
+    position: relative;
+    overflow-x: hidden;
   }
-  h1, h2, h3, .nav-brand { font-family: 'Space Grotesk', sans-serif; }
-  a { color: var(--accent); text-decoration: none; }
-  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  /* Luxury gold wave backdrop, fixed behind content */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 900px 500px at 8% 0%, rgba(217,196,140,0.35), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 25%, rgba(166,129,60,0.12), transparent 55%),
+      var(--bg);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    top: -10%; left: -10%; width: 120%; height: 60%;
+    z-index: -1;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cpath d='M0,300 C200,200 300,400 500,300 C700,200 800,350 1200,150' stroke='%23D9C48C' stroke-width='2' fill='none' opacity='0.35'/%3E%3Cpath d='M0,340 C220,240 320,430 520,330 C720,230 820,380 1200,190' stroke='%23B08D46' stroke-width='1.5' fill='none' opacity='0.25'/%3E%3Cpath d='M0,260 C180,170 300,360 480,260 C680,160 780,320 1200,110' stroke='%23A6813C' stroke-width='1' fill='none' opacity='0.2'/%3E%3C/svg%3E") no-repeat;
+    background-size: cover;
+    opacity: 0.9;
+  }
+  .serif { font-family: 'Fraunces', serif; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+  ::selection { background: var(--gold); color: #fff; }
 
-  header {
+  /* Letterhead */
+  .letterhead {
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    background: rgba(251,250,247,0.75);
+    backdrop-filter: blur(6px);
     position: sticky; top: 0; z-index: 10;
-    background: rgba(11,15,20,0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
   }
-  nav {
-    display: flex; justify-content: space-between; align-items: center;
-    max-width: 1000px; margin: 0 auto; padding: 16px 24px;
+  .letterhead .container { display: flex; justify-content: space-between; align-items: center; }
+  .wordmark { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .letter-nav { display: flex; gap: 30px; }
+  .letter-nav a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
-  .nav-brand { font-weight: 700; font-size: 1.1rem; }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { color: var(--text-dim); font-size: 0.95rem; font-weight: 500; }
-  .nav-links a:hover { color: var(--text); }
+  .letter-nav a:hover { color: var(--gold); }
 
-  .hero {
-    padding: 100px 24px 80px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero .eyebrow {
-    color: var(--accent);
-    font-size: 0.85rem;
+  /* Hero / masthead */
+  .masthead { padding: 74px 0 56px; border-bottom: 1px solid var(--line); }
+  .masthead-flex { display: flex; gap: 44px; align-items: flex-start; flex-wrap: wrap; }
+  .masthead-text { flex: 1; min-width: 280px; }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 16px;
+    color: var(--gold);
+    margin-bottom: 22px;
+    display: flex; align-items: center; gap: 10px;
   }
-  .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
-    font-weight: 700;
-    line-height: 1.15;
+  .masthead .kicker::before { content: ""; width: 26px; height: 1px; background: var(--gold); display: inline-block; }
+  .masthead h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5.4vw, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+  .masthead .role {
+    margin-top: 20px;
+    font-size: 1.08rem;
+    color: var(--muted);
+    max-width: 46ch;
+  }
+  .masthead-meta {
+    margin-top: 40px;
+    display: flex;
+    gap: 44px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .meta-item .mono { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; display:block; margin-bottom: 6px; }
+  .meta-item div.value { font-size: 0.95rem; }
+
+  /* Portrait frame */
+  .portrait-frame {
+    width: 168px;
+    height: 168px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px -18px rgba(107,84,20,0.35);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .portrait-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .portrait-frame::after {
+    content: "";
+    position: absolute; inset: 0;
+    border: 1px solid var(--gold-2);
+    border-radius: 50%;
+    margin: 6px;
+    pointer-events: none;
+  }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
     margin-bottom: 18px;
   }
-  .hero h1 span { color: var(--accent); }
-  .hero p {
-    color: var(--text-dim);
-    font-size: 1.1rem;
-    max-width: 560px;
-    margin-bottom: 32px;
+  h2.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.7rem;
+    margin-bottom: 30px;
+    letter-spacing: -0.01em;
   }
-  .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn {
-    padding: 12px 22px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border: 1px solid var(--border);
+
+  .pull-quote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+    border-left: 2px solid var(--gold);
+    padding-left: 24px;
+    margin: 28px 0;
+    max-width: 60ch;
   }
-  .btn-primary { background: var(--accent); color: #0b0f14; border: none; }
-  .btn-secondary { color: var(--text); }
+  #about p { color: var(--muted); max-width: 66ch; margin-bottom: 16px; font-size: 1rem; }
+  #about p strong { color: var(--ink); font-weight: 600; }
 
-  section { padding: 72px 24px; border-bottom: 1px solid var(--border); }
-  .section-title {
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-2);
-    font-weight: 600;
-    margin-bottom: 8px;
+  .focus-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 0; border-top: 1px solid var(--line); }
+  .focus-list li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
   }
-  .section-heading { font-size: 1.8rem; margin-bottom: 32px; }
+  .focus-list .num { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--gold); }
+  .focus-list .label { font-size: 0.98rem; }
+  .focus-list .desc { display:block; color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
 
-  #about p { color: var(--text-dim); max-width: 680px; font-size: 1.05rem; }
+  /* Selected work */
+  .work-entry {
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 28px;
+    transition: background 0.2s ease;
+  }
+  .work-entry:last-child { border-bottom: none; }
+  .work-year { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--muted); padding-top: 4px; }
+  .work-body h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.2rem; margin-bottom: 10px; }
+  .work-body p { color: var(--muted); margin-bottom: 14px; max-width: 60ch; }
+  .work-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .work-tags span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.02em;
+  }
+  .work-link { font-size: 0.88rem; font-weight: 600; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 1px; }
+  .work-link:hover { opacity: 0.7; }
+  .work-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 18px;
+    opacity: 0.8;
+  }
 
+  /* Skills — lift on hover, Python emphasized */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
-    max-width: 700px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
   }
   .skill-pill {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: linear-gradient(160deg, var(--accent-soft), var(--panel));
+    border: 1px solid var(--gold-2);
     border-radius: 8px;
-    padding: 10px 16px;
+    padding: 16px 16px;
     text-align: center;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-dim);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--accent);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    cursor: default;
+    box-shadow: 0 10px 20px -14px rgba(107,84,20,0.3);
+  }
+  .skill-pill:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px -14px rgba(107,84,20,0.4);
+    border-color: var(--gold);
+    background: #fff;
   }
 
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-  }
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .project-card h3 { font-size: 1.15rem; }
-  .project-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; }
-  .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tech-tags span {
-    font-size: 0.75rem;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    padding: 4px 9px;
-    border-radius: 6px;
-    color: var(--accent-2);
-  }
-  .project-links { display: flex; gap: 16px; font-size: 0.9rem; font-weight: 600; }
+  .cap-table { width: 100%; border-collapse: collapse; }
+  .cap-table tr { border-top: 1px solid var(--line); }
+  .cap-table tr:last-child { border-bottom: 1px solid var(--line); }
+  .cap-table td { padding: 16px 0; vertical-align: top; }
+  .cap-table td:first-child { width: 200px; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .cap-table td:last-child { font-size: 0.95rem; }
 
-  #contact p { color: var(--text-dim); margin-bottom: 24px; max-width: 500px; }
-  .contact-links { display: flex; flex-wrap: wrap; gap: 14px; }
+  #contact { border-bottom: none; }
+  .contact-inner { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 30px; }
+  .contact-inner h2 { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 500; max-width: 14ch; line-height: 1.15; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  .contact-links a { font-size: 0.98rem; border-bottom: 1px solid transparent; }
+  .contact-links a:hover { border-bottom-color: var(--ink); }
 
-  footer {
-    padding: 32px 24px;
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 0.85rem;
-  }
+  footer { padding: 26px 0 40px; }
+  footer .container { display: flex; justify-content: space-between; color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.03em; }
 
   @media (max-width: 640px) {
-    .nav-links { gap: 16px; }
-    .hero { padding: 70px 20px 50px; }
-    section { padding: 56px 20px; }
+    .letter-nav { gap: 16px; }
+    .letter-nav a { font-size: 0.62rem; }
+    section { padding: 48px 0; }
+    .work-entry { grid-template-columns: 1fr; gap: 8px; }
+    .contact-inner { flex-direction: column; align-items: flex-start; }
+    .contact-links { align-items: flex-start; }
+    .masthead-flex { flex-direction: column-reverse; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <div class="nav-brand">Hariharan A</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section class="hero">
+<div class="letterhead">
   <div class="container">
-    <div class="eyebrow">AI / DS Student</div>
-    <h1>Building things with <span>AI, ML & GenAI.</span></h1>
-    <p>AI/DS student exploring generative AI and large language model applications, currently building projects with Claude and other GenAI tools.</p>
-    <div class="btn-row">
-      <a href="#projects" class="btn btn-primary">View Projects</a>
-      <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+    <div class="wordmark">HARIHARAN A</div>
+    <nav class="letter-nav">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<section class="masthead">
+  <div class="container masthead-flex">
+    <div class="masthead-text">
+      <div class="kicker">Profile</div>
+      <h1>HARIHARAN A</h1>
+      <p class="role">Student researcher and builder focused on generative AI and applied language model systems — currently developing practical projects with the Claude API and modern ML tooling.</p>
+      <div class="masthead-meta">
+        <div class="meta-item">
+          <span class="mono">Based in</span>
+          <div class="value">Coimbatore, Tamil Nadu</div>
+        </div>
+        <div class="meta-item">
+          <span class="mono">Focus</span>
+          <div class="value">Fullstrack developer,Generative AI · LLM Systems</div>
+        </div>
+        <div class="meta-item">
+          <span class="mono">Status</span>
+          <div class="value">Open to internships</div>
+        </div>
+      </div>
+    </div>
+    <div class="portrait-frame">
+      <img src="profile.jpg" alt="Hariharan A">
     </div>
   </div>
 </section>
 
 <section id="about">
   <div class="container">
-    <div class="section-title">About</div>
-    <h2 class="section-heading">Who I am</h2>
-    <p>I'm Hariharan, a student passionate about Artificial Intelligence and Data science, Machine Learning, and Generative AI. I enjoy learning how large language models work and experimenting with tools like the Claude API to build practical applications. I'm currently building my project portfolio and looking for opportunities to apply my skills to real-world problems.</p>
+    <div class="eyebrow">01 — About</div>
+    <h2 class="title">Background</h2>
+    <p>I'm Hariharan, a student building at the intersection of artificial intelligence and applied software. My interest is in how large language models can be shaped — through prompting, retrieval, and system design — into tools that solve real, specific problems rather than generic demos.</p>
+    <blockquote class="pull-quote">"I'm less interested in what a model can do in the abstract, and more in what it can do for one real user, on one real problem."</blockquote>
+    <p>My current work centers on the <strong>Claude API</strong> and the broader generative AI toolchain — experimenting with prompt design, retrieval-augmented systems, and the fundamentals of machine learning that sit underneath them. I document what I build and continue to expand this portfolio as new work is finished.</p>
   </div>
 </section>
 
-<section id="skills">
+<section id="focus">
   <div class="container">
-    <div class="section-title">Skills</div>
-    <h2 class="section-heading">Tools & technologies</h2>
+    <div class="eyebrow">02 — Focus Areas</div>
+    <h2 class="title">Where I work</h2>
+    <ul class="focus-list">
+      <li><span class="num">01</span><span><span class="label">Generative AI</span><span class="desc">Prompted &amp; agentic LLM systems</span></span></li>
+      <li><span class="num">02</span><span><span class="label">Machine Learning</span><span class="desc">Core models &amp; applied methods</span></span></li>
+      <li><span class="num">03</span><span><span class="label">LLM Integration</span><span class="desc">Claude API, retrieval, tooling</span></span></li>
+      <li><span class="num">04</span><span><span class="label">Data Analysis</span><span class="desc">Python, structured data work</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container">
+    <div class="eyebrow">03 — Selected Work</div>
+    <h2 class="title">Projects</h2>
+
+    <!-- ============================================
+         PROJECT ENTRY — copy this whole block to ADD a project.
+         Delete this whole block to REMOVE a project.
+         ============================================ -->
+    <div class="work-entry">
+      <div class="work-year">2026</div>
+      <div class="work-body">
+        <h3>[ Project title — add here ]</h3>
+        <p>Replace with a real project. Describe the problem in one sentence, what you built to solve it, and any concrete outcome — e.g. "Built a document Q&amp;A assistant using the Claude API and retrieval over a custom knowledge base."</p>
+        <div class="work-tags"><span>Python</span><span>Claude API</span></div>
+        <a class="work-link" href="#">View on GitHub →</a>
+      </div>
+    </div>
+    <!-- END PROJECT ENTRY -->
+
+    <div class="work-entry">
+      <div class="work-year">2026</div>
+      <div class="work-body">
+        <h3>[ Project title — add here ]</h3>
+        <p>Even coursework or a small notebook counts here — explain the goal, your approach, and what you learned building it.</p>
+        <div class="work-tags"><span>Machine Learning</span></div>
+        <a class="work-link" href="#">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-year">2026</div>
+      <div class="work-body">
+        <h3>[ Project title — add here ]</h3>
+        <p>A third project slot — swap in real work as you complete it. Keep descriptions specific: the problem, the build, the result.</p>
+        <div class="work-tags"><span>Data Analysis</span></div>
+        <a class="work-link" href="#">View on GitHub →</a>
+      </div>
+    </div>
+
+    <p class="work-note">To add more: copy a "work-entry" block in the code. To remove one: delete its block.</p>
+
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="container">
+    <div class="eyebrow">04 — Capabilities</div>
+    <h2 class="title">Skills</h2>
     <div class="skills-grid">
       <div class="skill-pill">Python</div>
+      <div class="skill-pill">C++</div>
       <div class="skill-pill">Machine Learning</div>
-      <div class="skill-pill">Deep Learning</div>
       <div class="skill-pill">Generative AI</div>
       <div class="skill-pill">Claude API</div>
       <div class="skill-pill">Prompt Engineering</div>
-      <div class="skill-pill">Data Analysis</div>
       <div class="skill-pill">SQL</div>
+      <div class="skill-pill">Data Analysis</div>
       <div class="skill-pill">Git / GitHub</div>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <div class="container">
-    <div class="section-title">Projects</div>
-    <h2 class="section-heading">Things I've built</h2>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <h3>A</h3>
-        <p> " "</p>
-        <div class="tech-tags"><span>Python</span><span>Claude API</span></div>
-        <div class="project-links">
-          <a href="#">GitHub →</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <h3> </h3>
-        <p> </p>
-        <div class="tech-tags"><span>Machine Learning</span></div>
-        <div class="project-links">
-          <a href="#">GitHub →</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <h3>Add Your Project Title</h3>
-        <p>Describe another project here — what problem it solves and any results if relevant.</p>
-        <div class="tech-tags"><span>Data Analysis</span></div>
-        <div class="project-links">
-          <a href="#">GitHub →</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <section id="contact">
-  <div class="container">
-    <div class="section-title">Contact</div>
-    <h2 class="section-heading">Let's connect</h2>
-    <p>Open to internships and entry-level roles in AI/ML. Feel free to reach out.</p>
+  <div class="container contact-inner">
+    <h2>Let's build something.</h2>
     <div class="contact-links">
-      <a href="mailto:hariharan259a@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/hariharana25" target="_blank">LinkedIn</a>
-      <a href="https://github.com/HARIHARAN-A259" target="_blank">GitHub</a>
+      <a href="mailto:hariharan259a@gmail.com">hariharan259a@gmail.com</a>
+      <a href="https://www.linkedin.com/in/hariharana25" target="_blank">LinkedIn ↗</a>
+      <a href="https://github.com/HARIHARAN-A259" target="_blank">GitHub ↗</a>
     </div>
   </div>
 </section>
 
 <footer>
-  © 2026 Hariharan A. Built with HTML & CSS.
+  <div class="container">
+    <span>© 2026 HARIHARAN A.</span>
+    <span>Coimbatore, Tamil Nadu</span>
+  </div>
 </footer>
 
 </body>
